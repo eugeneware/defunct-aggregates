@@ -1,0 +1,41 @@
+{
+  "name": "defunct-aggregates",
+  "version": "0.0.1",
+  "description": "Aggregate operations for object-mode streams",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eugeneware/defunct-aggregates"
+  },
+  "keywords": [
+    "stream",
+    "streams",
+    "streaming",
+    "aggregate",
+    "sum",
+    "group-by",
+    "aggregates",
+    "leveldb",
+    "levelup",
+    "count",
+    "max",
+    "min"
+  ],
+  "author": "Eugene Ware <eugene@noblesamurai.com>",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/eugeneware/defunct-aggregates/issues"
+  },
+  "dependencies": {
+    "defunct": "^0.3.0"
+  },
+  "devDependencies": {
+    "streamlined": "^0.2.1",
+    "redtape": "~0.1.0",
+    "tape": "~2.3.2",
+    "JSONStream": "^0.7.2"
+  }
+}
