@@ -18,7 +18,7 @@ These functions are helper functions that work well with
 [streamlined](https://github.com/eugeneware/streamlined), and provide ways to
 `sum`, `count`, `max` etc, as you might in SQL, but with object streams!
 
-### Group by and sum by column
+### Group by and SUM by column
 
 ``` js
 var dagg = require('defunct-aggregates'),
@@ -44,6 +44,36 @@ myObjectStream()
         'www.ekit.com': 2791762707,
         'webmail.myway.com': 13958909358,
         'poczta.wp.pl': 2791781736 }
+     */
+  });
+```
+
+### Group by and MAX by column
+
+``` js
+var dagg = require('defunct-aggregates'),
+    sl = require('streamlined');
+myObjectStream()
+  .pipe(sl.aggregate('properties.$initial_referring_domain', dagg.max('properties.time')))
+  .on('data', function (data) {
+    console.log(data);
+    /*
+      {
+        '$direct': 1395896611,
+        'www.something.com': 1395871232,
+        'mail.qq.com': 1395893241,
+        'cwebmail.mail.163.com': 1395725179,
+        'm.email.seznam.cz': 1395733001,
+        undefined: 1395773053,
+        'm.facebook.com': 1395781835,
+        'www.google.co.uk': 1395798443,
+        'nm20.abv.bg': 1395801501,
+        'www.google.com': 1395895873,
+        'webmailb.netzero.net': 1395839884,
+        'webmail.kitchenrefacers.ca': 1395863906,
+        'www.ekit.com': 1395881354,
+        'webmail.myway.com': 1395891210,
+        'poczta.wp.pl': 1395890868 } 
      */
   });
 ```
