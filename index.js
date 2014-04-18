@@ -69,6 +69,33 @@ function avg(selectorExpr) {
   };
 }
 
+exports.first = first;
+function first(selectorExpr) {
+  var locator = selector(selectorExpr);
+  var _first;
+  return function (acc, data) {
+    var val = locator(data);
+    if (typeof val !== 'undefined' && typeof _first === 'undefined') {
+      _first  = val;
+    }
+    acc = _first;
+    return acc;
+  };
+}
+
+exports.last = last;
+function last(selectorExpr) {
+  var _last;
+  var locator = selector(selectorExpr);
+  return function (acc, data) {
+    var val = locator(data);
+    if (typeof val !== 'undefined') {
+      _last = val;
+    }
+    return _last;
+  };
+}
+
 exports.collect = collect;
 function collect(selectorExpr) {
   var locator = selector(selectorExpr);

@@ -154,6 +154,62 @@ it('should be able to find the count of things', 1, function(t, events) {
     });
 });
 
+it('should be able to find the first of things', 1, function(t, events) {
+  events
+    .pipe(sl.aggregate('properties.$initial_referring_domain',
+      dagg.first('properties.time')))
+    .on('data', function (data) {
+      var expected = {
+        '$direct': 1395714685,
+        'www.something.com': 1395714685,
+        'mail.qq.com': 1395714685,
+        'cwebmail.mail.163.com': 1395714685,
+        'm.email.seznam.cz': 1395714685,
+        undefined: 1395714685,
+        'm.facebook.com': 1395714685,
+        'www.google.co.uk': 1395714685,
+        'nm20.abv.bg': 1395714685,
+        'www.google.com': 1395714685,
+        'webmailb.netzero.net': 1395714685,
+        'webmail.kitchenrefacers.ca': 1395714685,
+        'www.ekit.com': 1395714685,
+        'webmail.myway.com': 1395714685,
+        'poczta.wp.pl': 1395714685 };
+      t.deepEquals(data, expected, 'first times by referring domain');
+    })
+    .on('end', function () {
+      t.end();
+    });
+});
+
+it('should be able to find the last of things', 1, function(t, events) {
+  events
+    .pipe(sl.aggregate('properties.$initial_referring_domain',
+      dagg.last('properties.time')))
+    .on('data', function (data) {
+      var expected = {
+        '$direct': 1395896611,
+        'www.something.com': 1395871232,
+        'mail.qq.com': 1395893241,
+        'cwebmail.mail.163.com': 1395725179,
+        'm.email.seznam.cz': 1395733001,
+        undefined: 1395773053,
+        'm.facebook.com': 1395781835,
+        'www.google.co.uk': 1395798443,
+        'nm20.abv.bg': 1395801501,
+        'www.google.com': 1395895873,
+        'webmailb.netzero.net': 1395839884,
+        'webmail.kitchenrefacers.ca': 1395863906,
+        'www.ekit.com': 1395881354,
+        'webmail.myway.com': 1395891210,
+        'poczta.wp.pl': 1395890868 };
+      t.deepEquals(data, expected, 'last times by referring domain');
+    })
+    .on('end', function () {
+      t.end();
+    });
+});
+
 it('should be able to collect values', 1, function(t, events) {
   events
     .pipe(sl.aggregate('properties.$initial_referring_domain',
